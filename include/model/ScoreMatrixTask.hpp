@@ -1,10 +1,11 @@
 #ifndef __SCORE_MATRIX_TASK_HPP_
 #define __SCORE_MATRIX_TASK_HPP_
 #include "model/AbstractJsonObject.h"
-
-class ScoreMatrixTask : public AbstratJsonObject {
+#include "model/AbstractTask.hpp"
+class ScoreMatrixTask : public AbstractTask {
    public:
-    virtual std::string toJson() {
+   virtual ~ScoreMatrixTask()=default;
+    virtual std::string toJson() override{
         nlohmann::json j;
         j["type"] = "ScoreMatrixTask";
         j["leftTopElement"] = left_top_element_;
@@ -20,7 +21,7 @@ class ScoreMatrixTask : public AbstratJsonObject {
         j["gapOpen"] = gap_open_;
         return j.dump();
     }
-    virtual void loadFromJsonObject(const nlohmann::json& j) {
+    virtual void loadFromJsonObject(const nlohmann::json& j) override{
         left_top_element_ = j["leftTopElement"].template get<int>();
         top_row_ = j["topRow"].template get<std::vector<int>>();
         left_column_ = j["leftColumn"].template get<std::vector<int>>();
@@ -32,6 +33,10 @@ class ScoreMatrixTask : public AbstratJsonObject {
         mismatch_pentalty_ = j["mismatchPenalty"].template get<int>();
         gap_extra_ = j["gapExtra"].template get<int>();
         gap_open_ = j["gapOpen"].template get<int>();
+    }
+    virtual std::string getShortName() override {
+        return "ScoreMatrixTask(" + std::to_string(x_) + "," +
+               std::to_string(y_) + ")";
     }
 
    public:

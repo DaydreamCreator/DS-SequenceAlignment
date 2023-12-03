@@ -2,9 +2,10 @@
 #define __SCORE_MATRIX_TASK_RESPONSE_HPP_
 #include "model/AbstractJsonObject.h"
 
-class ScoreMatrixTaskResponse : public AbstratJsonObject {
+class ScoreMatrixTaskResponse : public AbstractJsonObject {
    public:
-    virtual std::string toJson() {
+   virtual ~ScoreMatrixTaskResponse ()=default;
+    virtual std::string toJson() override {
         nlohmann::json j;
         j["type"] = "ScoreMatrixTaskResponse";
         j["bottomRow"] = bottom_row_;
@@ -17,7 +18,7 @@ class ScoreMatrixTaskResponse : public AbstratJsonObject {
         return j.dump();
     }
 
-    virtual void loadFromJsonObject(const nlohmann::json& j) {
+    virtual void loadFromJsonObject(const nlohmann::json& j) override {
         bottom_row_ = j["bottomRow"].template get<std::vector<int>>();
         right_column_ = j["rightColumn"].template get<std::vector<int>>();
         x_ = j["x"].template get<int>();

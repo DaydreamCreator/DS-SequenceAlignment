@@ -4,7 +4,7 @@
 
 #include "nlohmann/json.hpp"
 
-class AbstratJsonObject {
+class AbstractJsonObject {
    public:
     virtual std::string toJson() = 0;
     virtual void loadFromJsonObject(const nlohmann::json& j) = 0;

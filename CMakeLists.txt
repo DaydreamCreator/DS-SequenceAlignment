@@ -3,6 +3,10 @@ cmake_minimum_required(VERSION 3.5.0)
 project(alignment)
 set (CMAKE_CXX_STANDARD 17)
 enable_testing()
+
+SET(CMAKE_CXX_FLAGS_DEBUG "$ENV{CXXFLAGS} -O0 -Wall -g -ggdb")
+SET(CMAKE_CXX_FLAGS_RELEASE "$ENV{CXXFLAGS} -O3 -Wall")
+
 # headers from our project
 include_directories(include)
 # headers from crow (headers-only version)

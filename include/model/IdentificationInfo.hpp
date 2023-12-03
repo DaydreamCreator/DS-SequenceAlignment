@@ -3,13 +3,14 @@
 #include <string>
 
 #include "model/AbstractJsonObject.h"
-class IdentificationInfo : public AbstratJsonObject {
+class IdentificationInfo : public AbstractJsonObject {
    public:
+    virtual ~IdentificationInfo() = default;
     std::string peer_id_;
     bool is_backup_master_;
 
     std::string getPeerID() { return peer_id_; }
-    bool isBackUpMaster() { return is_backup_master_ ;}
+    bool isBackUpMaster() { return is_backup_master_; }
 
     virtual std::string toJson() override {
         nlohmann::json j;

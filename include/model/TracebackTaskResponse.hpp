@@ -2,9 +2,10 @@
 #define __TRACEBACK_TASK_RESPONSE_HPP_
 #include "model/AbstractJsonObject.h"
 
-class TracebackTaskResponse : public AbstratJsonObject {
+class TracebackTaskResponse : public AbstractJsonObject {
    public:
-    virtual std::string toJson() {
+    virtual ~TracebackTaskResponse() = default;
+    virtual std::string toJson() override {
         nlohmann::json j;
         j["type"] = "TracebackTaskResponse";
         j["x"] = x_;
@@ -14,7 +15,7 @@ class TracebackTaskResponse : public AbstratJsonObject {
         j["sequence"] = sequence_;
         return j.dump();
     }
-    virtual void loadFromJsonObject(const nlohmann::json& j) {
+    virtual void loadFromJsonObject(const nlohmann::json& j) override {
         x_ = j["x"].template get<int>();
         y_ = j["y"].template get<int>();
         end_x_ = j["endX"].template get<int>();

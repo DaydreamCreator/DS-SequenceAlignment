@@ -1,10 +1,13 @@
 #ifndef __TRACEBACK_TASK_HPP_
 #define __TRACEBACK_TASK_HPP_
 #include "model/AbstractJsonObject.h"
+#include "model/AbstractTask.hpp"
 
-class TracebackTask : public AbstratJsonObject {
+class TracebackTask : public AbstractTask {
    public:
-    virtual std::string toJson() {
+   virtual ~TracebackTask()=default;
+
+    virtual std::string toJson() override{
         nlohmann::json j;
         j["type"] = "TracebackTask";
         j["x"] = x_;
@@ -13,11 +16,15 @@ class TracebackTask : public AbstratJsonObject {
         j["startY"] = start_y_;
         return j.dump();
     }
-    virtual void loadFromJsonObject(const nlohmann::json& j) {
+    virtual void loadFromJsonObject(const nlohmann::json& j)override {
         x_ = j["x"].template get<int>();
         y_ = j["y"].template get<int>();
         start_x_ = j["startX"].template get<int>();
         start_y_ = j["startY"].template get<int>();
+    }
+
+    virtual std::string getShortName() override {
+        return "TracebackTask(" + std::to_string(x_) + "," + std::to_string(y_) + ")";
     }
 
    public:

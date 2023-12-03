@@ -67,4 +67,16 @@ Use`./build/unittest` to run unittests.
 
 *You can also use `ctest --test-dir build`. We also support ctest in CMakeList.txt, but this is not recommended since you cannot see actual details of unit tests*
 
+## 6. debug
+when generating configuration, use this instead
+```
+cmake --build build -j32 -DCMAKE_BUILD_TYPE=Debug       
+```
 
+if you are mac os user,in order to have the core dumped when crash, every time you build, you also need run
+```shell
+/usr/libexec/PlistBuddy -c \"Add :com.apple.security.get-task-allow bool true\" segv.entitlements 
+codesign -s - -f --entitlements segv.entitlements ./build/unittest
+rm segv.entitlements 
+ulimit -c unlimited 
+```

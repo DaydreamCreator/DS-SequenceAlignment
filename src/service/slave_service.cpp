@@ -115,9 +115,13 @@ bool SlaveService::compute_score(){
     w.addLog(&w.log, score_table, direction_table, x_, y_);
 
     // load the variable values
-    bottom_row_ = score_table[row_len];
+    bottom_row_.clear();
+    for(int j = 1; j < col_len+1 ; j++){
+      bottom_row_.push_back(score_table[row_len][j]);
+    }
+    
     right_column_.clear();
-    for(int i = 0 ; i < row_len; j++){
+    for(int i = 1 ; i < row_len+1; i++){
         right_column_.push_back(score_table[i][col_len]);
     }
 

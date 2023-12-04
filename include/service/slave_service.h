@@ -49,7 +49,7 @@ class SlaveService : public AbstractService {
     int end_y_;
 
 
-    int gap_open_;
+    int gap_open_ = 0;
     int match_score_;
     int mismatch_pentalty_;
     int gap_extra_;
